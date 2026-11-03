@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pfadi Uzwil | Heimat + Lido</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="RZ_Logo_PfadiHeimatLido_4f.png" alt="Pfadi Uzwil | Heimat + Lido" class="logo-image">
+                </div>
+                <nav class="navigation">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Zurück zur Website</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-switch-container">
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="slider">
+                            <span class="slider-icon">🌙</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Content -->
+    <main class="main-content">
+        <div class="container">
+            <section class="admin-section">
+                <h1 class="admin-title">Admin Dashboard</h1>
+                <p class="admin-subtitle">Erstelle neue Posts für die Pfadi Uzwil Website</p>
+
+                <!-- Post Creation Form -->
+                <div class="post-form-container">
+                    <h2>Neuen Post erstellen</h2>
+                    <form id="post-form" class="post-form">
+                        <div class="form-group">
+                            <label for="post-title">Titel</label>
+                            <input type="text" id="post-title" name="title" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-author">Autor</label>
+                            <input type="text" id="post-author" name="author" value="Admin" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-date">Datum</label>
+                            <input type="date" id="post-date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-category">Kategorie</label>
+                            <select id="post-category" name="category">
+                                <option value="Aktivitäten">Aktivitäten</option>
+                                <option value="Events">Events</option>
+                                <option value="News">News</option>
+                                <option value="Allgemein">Allgemein</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-image">Bild-URL</label>
+                            <input type="url" id="post-image" name="image" placeholder="https://example.com/bild.jpg">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-image-upload">Oder Bild hochladen</label>
+                            <input type="file" id="post-image-upload" name="imageUpload" accept="image/*">
+                            <div id="image-preview" class="image-preview" style="display: none;">
+                                <img id="preview-img" src="" alt="Vorschau">
+                                <button type="button" onclick="removeImagePreview()" class="remove-image-btn">×</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-content">Inhalt</label>
+                            <textarea id="post-content" name="content" rows="6" required></textarea>
+                        </div>
+
+
+                        <button type="submit" class="submit-btn">Post erstellen</button>
+                    </form>
+                </div>
+
+                <!-- Existing Posts -->
+                <div class="posts-management">
+                    <h2>Bestehende Posts</h2>
+                    <div id="posts-list" class="posts-list">
+                        <!-- Posts werden hier dynamisch geladen -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const sliderIcon = document.querySelector('.slider-icon');
+            const body = document.body;
+
+            // Theme aus localStorage laden oder Standard setzen
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            body.setAttribute('data-theme', savedTheme);
+            updateThemeSwitch(savedTheme);
+
+            themeToggle.addEventListener('change', function() {
+                const newTheme = this.checked ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeSwitch(newTheme);
+            });
+
+            function updateThemeSwitch(theme) {
+                themeToggle.checked = theme === 'dark';
+                sliderIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+
+            // Post form functionality
+            const postForm = document.getElementById('post-form');
+            const postsList = document.getElementById('posts-list');
+
+            // Set today's date as default
+            document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+
+            // Image upload functionality
+            const imageUpload = document.getElementById('post-image-upload');
+            const imagePreview = document.getElementById('image-preview');
+            const previewImg = document.getElementById('preview-img');
+            const imageUrlInput = document.getElementById('post-image');
+
+            imageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        // Clear URL input when file is selected
+                        imageUrlInput.value = '';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Load existing posts
+            loadPosts();
+
+            postForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(postForm);
+                const imageFile = document.getElementById('post-image-upload').files[0];
+                let imageData = formData.get('image'); // URL from input
+                
+                // If file is uploaded, use file data instead of URL
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imageData = e.target.result;
+                        savePostWithImage(imageData);
+                    };
+                    reader.readAsDataURL(imageFile);
+                    return; // Exit early, savePostWithImage will handle the rest
+                }
+                
+                savePostWithImage(imageData);
+            });
+
+            function savePostWithImage(imageData) {
+                const formData = new FormData(postForm);
+                const post = {
+                    id: Date.now(),
+                    title: formData.get('title'),
+                    author: formData.get('author'),
+                    date: formData.get('date'),
+                    category: formData.get('category'),
+                    image: imageData,
+                    content: formData.get('content'),
+                    likes: 0
+                };
+
+                // Save post to localStorage
+                const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+                posts.unshift(post); // Add to beginning
+                localStorage.setItem('posts', JSON.stringify(posts));
+
+                // Reload posts
+                loadPosts();
+
+                // Reset form
+                postForm.reset();
+                document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+                document.getElementById('post-author').value = 'Admin';
+
+                alert('Post erfolgreich erstellt!');
+            }
+
+            function loadPosts() {
+                const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+                postsList.innerHTML = '';
+
+                if (posts.length === 0) {
+                    postsList.innerHTML = '<p class="no-posts">Noch keine Posts vorhanden.</p>';
+                    return;
+                }
+
+                posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post-item';
+                    postElement.innerHTML = `
+                        <div class="post-preview">
+                            <h3>${post.title}</h3>
+                            <p><strong>Autor:</strong> ${post.author} | <strong>Datum:</strong> ${post.date} | <strong>Kategorie:</strong> ${post.category}</p>
+                            <p><strong>Likes:</strong> ${post.likes}</p>
+                            <p class="post-content-preview">${post.content.substring(0, 100)}...</p>
+                        </div>
+                        <div class="post-actions">
+                            <button onclick="editPost(${post.id})" class="edit-btn">Bearbeiten</button>
+                            <button onclick="deletePost(${post.id})" class="delete-btn">Löschen</button>
+                        </div>
+                    `;
+                    postsList.appendChild(postElement);
+                });
+            }
+
+            // Image preview functions
+            window.removeImagePreview = function() {
+                document.getElementById('image-preview').style.display = 'none';
+                document.getElementById('post-image-upload').value = '';
+                document.getElementById('preview-img').src = '';
+            };
+
+            // Clear URL input when file is selected
+            imageUrlInput.addEventListener('input', function() {
+                if (this.value) {
+                    imagePreview.style.display = 'none';
+                    imageUpload.value = '';
+                }
+            });
+
+            // Global functions for post actions
+            window.editPost = function(id) {
+                const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+                const post = posts.find(p => p.id === id);
+                
+                if (post) {
+                    document.getElementById('post-title').value = post.title;
+                    document.getElementById('post-author').value = post.author;
+                    document.getElementById('post-date').value = post.date;
+                    document.getElementById('post-category').value = post.category;
+                    document.getElementById('post-image').value = post.image;
+                    document.getElementById('post-content').value = post.content;
+                    
+                    // Remove the post from the list
+                    const updatedPosts = posts.filter(p => p.id !== id);
+                    localStorage.setItem('posts', JSON.stringify(updatedPosts));
+                    loadPosts();
+                }
+            };
+
+            window.deletePost = function(id) {
+                if (confirm('Möchten Sie diesen Post wirklich löschen?')) {
+                    const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+                    const updatedPosts = posts.filter(p => p.id !== id);
+                    localStorage.setItem('posts', JSON.stringify(updatedPosts));
+                    loadPosts();
+                }
+            };
+        });
+    </script>
+</body>
+</html>

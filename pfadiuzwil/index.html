@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pfadi Uzwil | Heimat + Lido</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="RZ_Logo_PfadiHeimatLido_4f.png" alt="Pfadi Uzwil | Heimat + Lido" class="logo-image">
+                    </a>
+                </div>
+                <nav class="navigation">
+                    <ul class="nav-links">
+                        <li><a href="#about">Über uns</a></li>
+                        <li class="dropdown">
+                            <a href="#stufen" class="dropdown-toggle">Stufen</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="biber.html">Biberstufe</a></li>
+                                <li><a href="woelfe.html">Wolfsstufe</a></li>
+                                <li><a href="pfader.html">Pfaderstufe</a></li>
+                                <li><a href="pios.html">Piostufe</a></li>
+                                <li><a href="#rover">Roverstufe</a></li>
+                                <li><a href="#apv">APV-Altpfaderverein</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#programme">Quartalsprogramme</a></li>
+                        <li><a href="#heime">Pfadiheime</a></li>
+                        <li><a href="#" onclick="showAdminLogin()" class="admin-link">Admin</a></li>
+                    </ul>
+                </nav>
+                <div class="theme-switch-container">
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode">
+                        <span class="slider">
+                            <span class="slider-icon">🌙</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-carousel">
+            <div class="carousel-slides">
+                <div class="slide active">
+                    <img src="1-012_homeslide01-scaled.jpg" alt="Pfadi Aktivitäten" class="hero-image">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <h1 class="hero-title">Pfadi Uzwil | Heimat & Lido</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="2-02_homeslide02-scaled.jpg" alt="Pfadi Landschaft" class="hero-image">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <h1 class="hero-title">Pfadi Uzwil | Heimat & Lido</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="1-02_homeslider03-scaled.jpg" alt="Pfadi Abenteuer" class="hero-image">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <h1 class="hero-title">Pfadi Uzwil | Heimat & Lido</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Four Column Activity Section -->
+            <section class="activities-section">
+            <div class="activities-grid">
+                <!-- Biber Column -->
+                <a href="biber.html" class="activity-column activity-link">
+                    <h2 class="activity-title">Biber</h2>
+                    <div class="activity-image">
+                        <img src="biberstufe-1-scaled.jpg" alt="Biber Aktivitäten" class="activity-img">
+                    </div>
+                    <div class="activity-text">
+                        <p>Bist du wild und laut oder gemütlich und ruhig? Schauen wir uns Blumen an oder klettern wir auf Bäume? Wir treffen uns einmal im Monat und lernen die Natur kennen.</p>
+                    </div>
+                </a>
+
+                <!-- Wölfe Column -->
+                <a href="woelfe.html" class="activity-column activity-link">
+                    <h2 class="activity-title">Wölfe</h2>
+                    <div class="activity-image">
+                        <img src="Home_Woelfe-scaled.jpg" alt="Wölfe Aktivitäten" class="activity-img">
+                    </div>
+                    <div class="activity-text">
+                        <p>Abenteuer, Kreativität und Zeitreisen erwarten dich! Hilf deinem Plüschtier und erlebe spannende Geschichten. Wir treffen uns wöchentlich zum Spielen und Spass haben.</p>
+                    </div>
+                </a>
+
+                <!-- Pfader Column -->
+                <a href="pfader.html" class="activity-column activity-link">
+                    <h2 class="activity-title">Pfader</h2>
+                    <div class="activity-image">
+                        <img src="Home_pfader-scaled.jpg" alt="Pfader Aktivitäten" class="activity-img">
+                    </div>
+                    <div class="activity-text">
+                        <p>Feuer machen, kochen, auf dem Campingstuhl entspannen und einen "Beauty Day" erleben. Lerne dich selbst und die Natur durch Pfadi-Aktivitäten kennen.</p>
+                    </div>
+                </a>
+
+                <!-- Pios Column -->
+                <a href="pios.html" class="activity-column activity-link">
+                    <h2 class="activity-title">Pios</h2>
+                    <div class="activity-image">
+                        <img src="pois-1-scaled.jpg" alt="Pios Aktivitäten" class="activity-img">
+                    </div>
+                    <div class="activity-text">
+                        <p>Fast erwachsen, aber noch nicht ganz. Plane deine eigenen Aktivitäten mit Hilfe der Leiter und übernimm Projekte, die dich interessieren.</p>
+                    </div>
+                </a>
+            </div>
+            </section>
+
+            <!-- Posts Section -->
+            <section class="article-section">
+                <div id="posts-container">
+                    <!-- Posts werden hier dynamisch geladen -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="RZ_Logo_PfadiHeimatLido_4f.png" alt="Pfadi Uzwil | Heimat + Lido" class="footer-logo-image">
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Pfadi Uzwil | Heimat + Lido</h3>
+                    <div class="address">
+                        <p>Heimatheim</p>
+                        <p>Rehweidstrasse 8c</p>
+                        <p>9242 Oberuzwil</p>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="#heimatheim">Heimatheim</a></li>
+                        <li><a href="#lidoheim">Lidoheim</a></li>
+                        <li><a href="#regionalverband">Regionalverband</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Social Media</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.instagram.com/heimatlidouzwil/" target="_blank">Instagram</a></li>
+                        <li><a href="https://de-de.facebook.com/heimat.lido/" target="_blank">Facebook</a></li>
+                        <li><a href="https://pfadi.swiss/de/go/pfadi-entdecken/" target="_blank">PBS</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 Pfadi Uzwil by Nazar Tobilevych | All Rights Reserved |
+                </div>
+                <div class="scroll-top">
+                    <a href="#top">↑</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <span class="close" onclick="closeAdminLogin()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-password">Passwort</label>
+                        <input type="password" id="admin-password" name="password" required>
+                        <div id="password-error" class="error-message" style="display: none;">
+                            Falsches Passwort!
+                        </div>
+                    </div>
+                    <button type="submit" class="login-btn">Anmelden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carousel functionality
+            let slideIndex = 1;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+
+            function showSlide(n) {
+                // Alle Slides verstecken
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Slide-Index anpassen
+                if (n > slides.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = slides.length}
+                
+                // Aktuellen Slide anzeigen
+                if (slides[slideIndex - 1]) {
+                    slides[slideIndex - 1].classList.add('active');
+                }
+                if (dots[slideIndex - 1]) {
+                    dots[slideIndex - 1].classList.add('active');
+                }
+            }
+
+            function currentSlide(n) {
+                slideIndex = n;
+                showSlide(slideIndex);
+            }
+
+            function nextSlide() {
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}
+                showSlide(slideIndex);
+            }
+
+            // Automatisches Wechseln alle 5 Sekunden
+            setInterval(nextSlide, 5000);
+
+            // Initialisierung
+            showSlide(1);
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const sliderIcon = document.querySelector('.slider-icon');
+            const body = document.body;
+
+            // Theme aus localStorage laden oder Standard setzen
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            body.setAttribute('data-theme', savedTheme);
+            updateThemeSwitch(savedTheme);
+
+            themeToggle.addEventListener('change', function() {
+                const newTheme = this.checked ? 'dark' : 'light';
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeSwitch(newTheme);
+            });
+
+            function updateThemeSwitch(theme) {
+                themeToggle.checked = theme === 'dark';
+                sliderIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+
+            // Load and display posts
+            loadPosts();
+            
+            // Listen for storage changes (when posts are added from admin)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'posts') {
+                    loadPosts();
+                }
+            });
+            
+            // Also check for posts when page becomes visible (back from admin)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    loadPosts();
+                }
+            });
+        });
+
+        function loadPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            if (!postsContainer) return; // Exit if no posts container
+            
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            console.log('Loading posts:', posts);
+            
+            if (posts.length === 0) {
+                postsContainer.innerHTML = `
+                    <div class="no-posts-message">
+                        <h3>Noch keine Posts vorhanden</h3>
+                        <p>Erstelle den ersten Post im Admin-Bereich!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Display posts
+            let htmlContent = '';
+            posts.forEach(post => {
+                htmlContent += `
+                <div class="article-content">
+                    <div class="article-image">
+                        ${post.image ? `<img src="${post.image}" alt="${post.title}" class="article-img">` : '<div class="placeholder-image wide">📸</div>'}
+                    </div>
+                    <div class="article-text">
+                        <div class="article-meta">
+                            <span class="author">
+                                <span class="icon">👤</span>
+                                ${post.author}
+                            </span>
+                            <span class="date">
+                                <span class="icon">📅</span>
+                                ${new Date(post.date).toLocaleDateString('de-DE')}
+                            </span>
+                            <span class="categories">
+                                <select>
+                                    <option>${post.category}</option>
+                                </select>
+                            </span>
+                        </div>
+                        <h2 class="article-title">${post.title}</h2>
+                        <div class="article-body">
+                            <p>${post.content}</p>
+                        </div>
+                        <div class="article-actions">
+                            <span class="likes">❤️ ${post.likes}</span>
+                            <a href="#" class="read-more">Read more</a>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            
+            postsContainer.innerHTML = htmlContent;
+        }
+
+
+
+
+
+        // Admin login functions
+        function showAdminLogin() {
+            document.getElementById('admin-modal').style.display = 'block';
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('admin-modal').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+            document.getElementById('password-error').style.display = 'none';
+            document.getElementById('admin-password').style.borderColor = '';
+        }
+
+        // Admin login form
+        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            const errorMessage = document.getElementById('password-error');
+            
+            // Simple password check (in real app, use proper authentication)
+            if (password === 'pfadi2024') {
+                window.location.href = 'admin.html';
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+                document.getElementById('admin-password').style.borderColor = '#e74c3c';
+                
+                // Hide error after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                    document.getElementById('admin-password').style.borderColor = '';
+                }, 3000);
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('admin-modal');
+            if (event.target === modal) {
+                closeAdminLogin();
+            }
+        }
+    </script>
+</body>
+</html>
